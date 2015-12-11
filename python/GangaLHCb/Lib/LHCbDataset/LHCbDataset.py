@@ -323,7 +323,7 @@ class LHCbDataset(GangaDataset):
                 try:
                     names.append('PFN:%s' % f.namePattern)
                 except:
-                    logger.warning("Cannot determine filename for: %s " % i)
+                    logger.warning("Cannot determine filename for: %s " % f)
                     raise GangaException("Cannot Get File Name")
         return names
 

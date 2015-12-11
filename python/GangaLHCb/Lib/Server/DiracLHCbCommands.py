@@ -15,8 +15,8 @@ diraclhcb = DiracLHCb()
 # Write to output pipe
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
-#def output(object):
-#    print(pickle.dumps(object), file=sys.stdout)
+def output(object):
+   print(pickle.dumps(object), file=sys.stdout)
 
 # DiracLHCb commands
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/

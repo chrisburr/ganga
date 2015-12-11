@@ -266,7 +266,7 @@ class BKQueryDict(GangaObject):
         #ds = LHCbDataset()
 
         this_list = [DiracFile(lfn=_file) for _file in files]
-        ds = LHCbDataSet(this_list)
+        ds = LHCbDataset(this_list)
         #new_files = []
         #for f in files:
         #    #new_files.append('LFN:' + str(f))

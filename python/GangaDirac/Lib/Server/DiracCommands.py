@@ -13,11 +13,11 @@ dirac = Dirac()
 
 # Write to output pipe
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-#reserved_stdout = sys.stdout
-#sys.stdout = sys.stderr
-# def output(object):
-#    reserved_stdout.write("CHECK ME " + str(object))
-#    reserved_stdout.write(pickle.dumps(object))
+reserved_stdout = sys.stdout
+sys.stdout = sys.stderr
+def output(object):
+    reserved_stdout.write("CHECK ME " + str(object))
+    reserved_stdout.write(pickle.dumps(object))
 
 # Dirac commands
 #/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/

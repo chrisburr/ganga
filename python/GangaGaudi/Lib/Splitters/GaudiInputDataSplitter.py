@@ -1,4 +1,6 @@
-from Ganga.GPIDev.Adapters.ISplitter import ISplitter, SplittingError
+from Ganga.GPIDev.Adapters.ISplitter import ISplitter
+from Ganga.Core.exceptions import SplitterError
+
 from Ganga.GPIDev.Lib.Job import Job
 from SplitterUtils import DatasetSplitter
 from Ganga.GPIDev.Schema import Schema, Version, SimpleItem
@@ -33,7 +35,7 @@ class GaudiInputDataSplitter(ISplitter):
     def _splitter(self, job, inputdata):
         if (inputdata is None) or (len(inputdata.files) == 0):
             logger.error('Cannot split if no inputdata given!')
-            raise SplittingError('inputdata is None')
+            raise SplitterError('inputdata is None')
         logger.debug("Found %s files inputdata" % str(len(inputdata.files)))
         return DatasetSplitter(inputdata, self.filesPerJob, self.maxFiles)
 
@@ -55,10 +57,10 @@ class GaudiInputDataSplitter(ISplitter):
         logger.debug("split")
         if self.filesPerJob < 1:
             logger.error('filesPerJob must be greater than 0.')
-            raise SplittingError('filesPerJob < 1 : %d' % self.filesPerJob)
+            raise SplitterError('filesPerJob < 1 : %d' % self.filesPerJob)
         elif (self.maxFiles is not None) and self.maxFiles < 1:
             logger.error('maxFiles must be greater than 0.')
-            raise SplittingError('maxFiles < 1 : %d' % self.maxFiles)
+            raise SplitterError('maxFiles < 1 : %d' % self.maxFiles)
 
         subjobs = []
 

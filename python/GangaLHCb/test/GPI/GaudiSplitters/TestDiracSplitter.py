@@ -4,7 +4,6 @@
 # $Id: TestDiracSplitter.py,v 1.7 2009-06-16 12:03:39 jwilliam Exp $
 ##########################################################################
 from __future__ import division
-from Ganga.GPIDev.Adapters.ISplitter import SplittingError
 from GangaTest.Framework.tests import GangaGPITestCase
 from GangaTest.Framework.utils import sleep_until_completed, sleep_until_state
 

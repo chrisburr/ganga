@@ -1,5 +1,4 @@
 from Ganga.Core.exceptions import SplitterError
-from Ganga.GPIDev.Adapters.ISplitter import SplittingError
 from GangaDirac.Lib.Backends.DiracUtils import result_ok
 from Ganga.Utility.Config import getConfig
 from Ganga.Utility.logging import getLogger
@@ -250,10 +249,10 @@ def _sortLFNreplicas(bad_lfns, allLFNs, LFNdict, ignoremissing, allLFNData):
             if len(results.get('Failed').keys()) > 0:
                 values = results.get('Failed')
                 errors.append(str(values))
-                #raise SplittingError( "Error getting LFN Replica information:\n%s" % str(values) )
+                #raise SplitterError( "Error getting LFN Replica information:\n%s" % str(values) )
                 for this_lfn in results.get('Failed').keys():
                     bad_lfns.append(this_lfn)
-        except SplittingError as split_Err:
+        except SplitterError as split_Err:
             raise split_Err
         except Exception as err:
             try:
@@ -317,7 +316,7 @@ def OfflineGangaDiracSplitter(_inputs, filesPerJob, maxFiles, ignoremissing):
         inputs = _inputs
 
     from Ganga.GPI import DiracFile
-    from Ganga.GPIDev.Adapters.ISplitter import SplittingError
+    from Ganga.GPIDev.Adapters.ISplitter import SplitterError
     # First FIND ALL LFN REPLICAS AND SE<->SITE MAPPINGS AND STORE THIS IN MEMORY
     # THIS IS DONE IN PARALLEL TO AVOID OVERLOADING DIRAC WITH THOUSANDS OF
     # REQUESTS AT ONCE ON ONE CONNECTION
@@ -330,10 +329,10 @@ def OfflineGangaDiracSplitter(_inputs, filesPerJob, maxFiles, ignoremissing):
     split_files = []
 
     if inputs is None:
-        raise SplittingError("Cannot Split Job as the inputdata appears to be None!")
+        raise SplitterError("Cannot Split Job as the inputdata appears to be None!")
 
     if len(inputs.getLFNs()) != len(inputs.files):
-        raise SplittingError("Error trying to split dataset using DIRAC backend with non-DiracFile in the inputdata")
+        raise SplitterError("Error trying to split dataset using DIRAC backend with non-DiracFile in the inputdata")
 
     file_replicas = {}
 
@@ -347,7 +346,7 @@ def OfflineGangaDiracSplitter(_inputs, filesPerJob, maxFiles, ignoremissing):
     for _lfn in allLFNData:
         if allLFNData[_lfn] is None:
             logger.error("Error in Getting LFN Replica information, aborting split")
-            raise SplittingError("Error in Getting LFN Replica information, aborting split")
+            raise SplitterError("Error in Getting LFN Replica information, aborting split")
 
     bad_lfns = []
 
@@ -357,7 +356,7 @@ def OfflineGangaDiracSplitter(_inputs, filesPerJob, maxFiles, ignoremissing):
     if len(bad_lfns) != 0:
         if ignoremissing is False:
             logger.error("Errors found getting LFNs:\n%s" % str(errors))
-            raise SplittingError("Error trying to split dataset with invalid LFN and ignoreMissing = False")
+            raise SplitterError("Error trying to split dataset with invalid LFN and ignoreMissing = False")
 
     # This finds all replicas for all LFNs...
     # This will probably struggle for LFNs which don't exist

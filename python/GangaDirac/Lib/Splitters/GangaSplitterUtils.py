@@ -1,4 +1,4 @@
-from Ganga.GPIDev.Adapters.ISplitter import SplittingError
+from Ganga.Core.exceptions import SplitterError
 from GangaDirac.Lib.Utilities.DiracUtilities import execute
 from GangaDirac.Lib.Backends.DiracUtils import result_ok
 from Ganga.Utility.Config import getConfig
@@ -26,7 +26,7 @@ def GangaDiracSplitter(inputs, filesPerJob, maxFiles, ignoremissing):
     i = inputs.__class__()
 
     if len(inputs.getLFNs()) != len(inputs.files):
-        raise SplittingError(
+        raise SplitterError(
             "Error trying to split dataset using DIRAC backend with non-DiracFile in the inputdata")
 
     file_replicas = {}

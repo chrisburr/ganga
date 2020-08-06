@@ -99,7 +99,7 @@ setup(name='ganga',
       extras_require={
           'dev': ['coverage', 'pytest', 'pytest-cov', 'pytest-pylint', 'pytest-mock'],
           'profiler' : ['memory_profiler'],
-          'LHCb' : ['LbDevTools']},
+          'LHCb' : ['LbDevTools', 'LbPlatformUtils']},
       classifiers=[
           'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
           'Programming Language :: Python :: 3.6',
